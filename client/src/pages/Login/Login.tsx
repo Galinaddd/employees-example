@@ -3,21 +3,22 @@ import { Layout } from "../../components/Layout/Layout";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { PasswordInput } from "../../components/password-input/PasswordInput";
 import { CustomBtn } from "../../components/custom-btn/Custom-btn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Path } from "../../paths";
 import { useLoginMutation, UserData } from "../../app/services/auth";
 import { isErrorWithMessage } from "../../utils/isErrorWithMessage";
 import { useState } from "react";
 import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
-import { log } from "console";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [loginUser, loginUserResult] = useLoginMutation();
   const [error, setError] = useState("");
 
   const onLogin = async (data: UserData) => {
     try {
       await loginUser(data).unwrap();
+      navigate("/");
     } catch (error) {
       console.log(error);
       const maybeError = isErrorWithMessage(error);

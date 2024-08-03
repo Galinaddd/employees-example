@@ -9,11 +9,17 @@ import "./index.css";
 import { Path } from "./paths";
 import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
+import { Auth } from "./features/auth/Auth";
+import { Employees } from "./pages/Employees/Employees";
+import { AddEmployee } from "./pages/AddEmployee/AddEmployee";
+import { Status } from "./pages/Status/Status";
+import { Employee } from "./pages/Employee/Employee";
+import { EditEmployee } from "./pages/EditEmoloyee/EditEmployee";
 
 const router = createBrowserRouter([
   {
     path: Path.home,
-    element: <h1>home</h1>,
+    element: <Employees />,
   },
   {
     path: Path.login,
@@ -22,6 +28,22 @@ const router = createBrowserRouter([
   {
     path: Path.register,
     element: <Register />,
+  },
+  {
+    path: Path.employeeAdd,
+    element: <AddEmployee />,
+  },
+  {
+    path: `${Path.status}/:status`,
+    element: <Status />,
+  },
+  {
+    path: `${Path.employee}/:id`,
+    element: <Employee />,
+  },
+  {
+    path: `${Path.employeeEdit}/:id`,
+    element: <EditEmployee />,
   },
 ]);
 
@@ -36,8 +58,9 @@ root.render(
           algorithm: theme.darkAlgorithm,
         }}
       >
-        <RouterProvider router={router} />
-        {/* <App /> */}
+        <Auth>
+          <RouterProvider router={router} />
+        </Auth>
       </ConfigProvider>
     </Provider>
   </React.StrictMode>
